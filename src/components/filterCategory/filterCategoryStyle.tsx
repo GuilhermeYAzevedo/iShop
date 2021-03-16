@@ -1,8 +1,8 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 14,
+  filterContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });

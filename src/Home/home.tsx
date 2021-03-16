@@ -1,43 +1,20 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Bag from 'react-native-vector-icons/SimpleLineIcons';
+import {Header} from '../components/header/header';
+import {FilterCategory} from '../components/filterCategory/filterCategory';
 
+import {View} from 'react-native';
 import styles from './homeStyle';
+import {ProductCards} from '../components/cards/productCards/productCards';
 
 const Home = () => {
   return (
     <View style={styles.container}>
       {/* Header     */}
-      <View style={styles.navBar}>
-        <View style={styles.iconsL}>
-          <Text>87020-210, Maringá</Text>
-          <Icon name="chevron-down-outline" size={22} color="#293644" />
-        </View>
-
-        <View style={styles.iconsR}>
-          <Icon
-            name="cart-outline"
-            style={{marginRight: 28}}
-            size={34}
-            color="#293644"
-          />
-          <Bag name="handbag" size={30} color="#293644" />
-        </View>
-      </View>
+      <Header />
       {/* filter */}
-      <View style={styles.filterContainer}>
-        <Text>Filtrar</Text>
-        <Text>Todos</Text>
-        <Text>Masculino</Text>
-        <Text>Feminino</Text>
-        <Text>Plus Size</Text>
-        <Text>Beleza</Text>
-        <Text>Infantil</Text>
-      </View>
-
+      <FilterCategory />
       {/* cards */}
-
+      <ProductCards title={'Moda Casual'} />
       {/* banners */}
 
       {/* near stores */}
@@ -46,4 +23,3 @@ const Home = () => {
 };
 
 export default Home;
-
