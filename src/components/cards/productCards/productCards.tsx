@@ -4,39 +4,43 @@ import {View, Text} from 'react-native';
 import styled from 'styled-components/native';
 
 import Carousel from 'react-native-snap-carousel';
+import {CarouselCardModel} from '../../../models/carousel';
 
-export class ProductCards extends React.Component<any, any> {
-  private carousel: any;
+
+interface State {
+  activeIndex: number;
+  carouselItems: CarouselCardModel[];
+}
+
+export class ProductCards extends React.Component<any, State> {
+  ref = React.createRef<any>();
+
+  
   constructor(props: any) {
-    super(props);
+    super(props);    
     this.state = {
       activeIndex: 0,
       carouselItems: [
         {
-          title: 'Item 1',
+          img: 'https://i.imgur.com/MABUbpDl.jpg',
+          title: 'Gustavo',
           text: 'Text 1',
         },
         {
-          title: 'Item 2',
+          img: 'https://i.imgur.com/2nCt3Sbl.jpg',
+          title: 'Guilherme',
           text: 'Text 2',
         },
         {
+          img: 'https://i.imgur.com/KZsmUi2l.jpg',
           title: 'Item 3',
           text: 'Text 3',
-        },
-        {
-          title: 'Item 4',
-          text: 'Text 4',
-        },
-        {
-          title: 'Item 5',
-          text: 'Text 5',
         },
       ],
     };
   }
 
-  _renderItem({item, index}) {
+  renderItem({item, index}: {item: CarouselCardModel; index: number}) {
     return (
       <View
         style={{
@@ -49,6 +53,7 @@ export class ProductCards extends React.Component<any, any> {
           borderColor: 'red',
           borderStyle: 'solid',
         }}>
+        <Image source={{uri: `${item.img}`}}></Image>
         <Text style={{fontSize: 30}}>{item.title}</Text>
         <Text>{item.text}</Text>
       </View>
@@ -66,11 +71,11 @@ export class ProductCards extends React.Component<any, any> {
         </Container>*/}
         <Carousel
           layout={'default'}
-          ref={(ref) => (this.carousel = ref)}
+          ref={this.ref}
           data={this.state.carouselItems}
           sliderWidth={300}
           itemWidth={300}
-          renderItem={this._renderItem}
+          renderItem={this.renderItem}
           onSnapToItem={(index) => this.setState({activeIndex: index})}
         />
       </View>
