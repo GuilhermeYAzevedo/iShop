@@ -1,64 +1,73 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Platform,
+  Image,
+  ScrollView,
+} from 'react-native';
 
 import styled from 'styled-components/native';
 
-import Carousel from 'react-native-snap-carousel';
-import {CarouselCardModel} from '../../../models/carousel';
-
+import Carousel, {
+  AdditionalParallaxProps,
+  ParallaxImage,
+} from 'react-native-snap-carousel';
+import { BannerCardModel, CarouselCardModel } from '../../../models/carousel';
 
 interface State {
   activeIndex: number;
   carouselItems: CarouselCardModel[];
+  parallaxProps?: any;
 }
 
+const { width: screenWidth } = Dimensions.get('window');
 export class ProductCards extends React.Component<any, State> {
   ref = React.createRef<any>();
 
-  
   constructor(props: any) {
-    super(props);    
+    super(props);
     this.state = {
       activeIndex: 0,
       carouselItems: [
         {
           img: 'https://i.imgur.com/MABUbpDl.jpg',
-          title: 'Gustavo',
-          text: 'Text 1',
+          title: 'Moda Casual',
         },
         {
           img: 'https://i.imgur.com/2nCt3Sbl.jpg',
-          title: 'Guilherme',
-          text: 'Text 2',
+          title: 'Acessórios',
         },
         {
           img: 'https://i.imgur.com/KZsmUi2l.jpg',
-          title: 'Item 3',
-          text: 'Text 3',
+          title: 'Tênis Esportivo',
         },
       ],
     };
   }
 
-  renderItem({item, index}: {item: CarouselCardModel; index: number}) {
+  renderItem(
+    { item, index }: { item: CarouselCardModel; index: number },
+    parallaxProps?: AdditionalParallaxProps,
+  ) {
     return (
-      <View
-        style={{
-          backgroundColor: 'floralwhite',
-          borderRadius: 5,
-          height: 250,
-          padding: 50,
-          marginLeft: 25,
-          marginRight: 25,
-          borderColor: 'red',
-          borderStyle: 'solid',
-        }}>
-        <Image source={{uri: `${item.img}`}}></Image>
-        <Text style={{fontSize: 30}}>{item.title}</Text>
-        <Text>{item.text}</Text>
+      <View style={styles.item}>
+        <ParallaxImage
+          source={{ uri: item.img }}
+          containerStyle={styles.imageContainer}
+          style={styles.image}
+          parallaxFactor={0.4}
+          {...parallaxProps}
+        />
+        <Text style={styles.title} numberOfLines={2}>
+          {item.title}
+        </Text>
       </View>
     );
   }
+
 
   render() {
     return (
@@ -70,37 +79,39 @@ export class ProductCards extends React.Component<any, State> {
           <Title>{this.props.title}</Title>
         </Container>*/}
         <Carousel
-          layout={'default'}
-          ref={this.ref}
+          sliderWidth={screenWidth}
+          sliderHeight={screenWidth}
+          itemWidth={screenWidth - 260}
           data={this.state.carouselItems}
-          sliderWidth={300}
-          itemWidth={300}
           renderItem={this.renderItem}
-          onSnapToItem={(index) => this.setState({activeIndex: index})}
+          hasParallaxImages={true}
+          loop={true}
         />
       </View>
     );
   }
 }
 
-export const Container = styled.View`
-  margin-top: 20px;
-  width: 136px;
-  height: 131px;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Title = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-`;
-
-const Image = styled.Image`
-  width: 136px;
-  height: 104px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-`;
+const styles = StyleSheet.create({
+  item: {
+    width: 136,
+    height: 104,
+  },
+  imageContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    width: 136,
+    height: 104,
+    borderRadius: 8,
+    marginTop: 10,
+  },
+  image: {
+    ...StyleSheet.absoluteFillObject,
+    resizeMode: 'cover',
+  },
+  title: {
+    fontSize: 16,
+    textAlign: 'center',
+    fontWeight: '400',
+  },
+});
