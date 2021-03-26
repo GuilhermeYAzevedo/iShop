@@ -22,6 +22,7 @@ import {ENTRIES1} from '../../../static/entries';
 interface State {
   activeIndex: number;
   carouselItems: BannerCardModel[];
+  parallaxProps?: any;
 }
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -29,10 +30,20 @@ const { width: screenWidth } = Dimensions.get('window');
 export class BannerCards extends React.Component<any, State> {
   ref = React.createRef<any>();
 
-  renderBanner({item, index}: {item: BannerCardModel; index: number}) {
+  renderBanner(
+    {item, index}: {item: BannerCardModel; index: number},
+    parallaxProps?: AdditionalParallaxProps,  
+  ) {
     return (
       <View
         style={styles.item}>
+          {/* <ParallaxImage
+          source={{ uri: item.img }}
+          containerStyle={styles.imageContainer}
+          style={styles.image}
+          parallaxFactor={0.4}
+          {...parallaxProps}
+        /> */}
           <View style={styles.imageContainer}>
             <Image
               source={{uri: item.img}}
@@ -45,15 +56,23 @@ export class BannerCards extends React.Component<any, State> {
 
   render() {
     return (
-      <View
-        style={styles.viewExample}>
+      <View>
+          {/* <Carousel
+          sliderWidth={screenWidth}
+          sliderHeight={screenWidth}
+          itemWidth={screenWidth - 260}
+          data={ENTRIES1}
+          renderItem={this.renderBanner}
+          hasParallaxImages={true}
+          loop={true}
+        /> */}
         <Carousel
           layout={'default'}
           ref={this.ref}
           data={ENTRIES1}
           sliderWidth={screenWidth}
           sliderHeight={screenWidth}
-          itemWidth={screenWidth - 100}
+          itemWidth={screenWidth - 260}
           renderItem={this.renderBanner}
           loop={true}
           autoplay={true}
@@ -80,22 +99,27 @@ export class BannerCards extends React.Component<any, State> {
 
 const styles = StyleSheet.create({
   viewExample: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      backgroundColor: 'red',
+      //flex: 1,
+      // flexDirection: 'row',
+      // justifyContent: 'center',
+      // backgroundColor: 'red',
+      // height: 180,
+      marginTop: 10,
   },
   item: {
-    backgroundColor: 'floralwhite',
+    backgroundColor: 'red',
     borderRadius: 5,
-    height: 136,
-    width: 104,
+    width: 320, 
+    height: 149,   
+    zIndex: 999999999,
   },
   imageContainer: {
     flex: 1,
-    backgroundColor: 'blue',
-    width: 136,
-    height: 104,
+    backgroundColor: 'green',
+    width: 220,
+    height: 149,
+    borderRadius: 2,
+    
   },
   image: {
     ...StyleSheet.absoluteFillObject, 
