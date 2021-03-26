@@ -1,8 +1,8 @@
 export class CarouselCardModel {
-  title: string;
-  img: string;  
+  title: string | undefined;
+  img: string | undefined;
 }
 
 export class BannerCardModel {
-  img: string;
+  img: string | undefined;
 }

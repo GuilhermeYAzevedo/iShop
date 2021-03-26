@@ -1,29 +1,21 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Platform,
-  Image,
-  ScrollView,
-} from 'react-native';
-
-import styled from 'styled-components/native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 
 import Carousel, {
   AdditionalParallaxProps,
   ParallaxImage,
 } from 'react-native-snap-carousel';
-import { BannerCardModel, CarouselCardModel } from '../../../models/carousel';
+import {CarouselCardModel} from '../../../models/carousel';
+import {ProductFilter} from '../../../static/productFilter';
 
 interface State {
   activeIndex: number;
-  carouselItems: CarouselCardModel[];
+  carouselItems?: CarouselCardModel[];
   parallaxProps?: any;
 }
 
-const { width: screenWidth } = Dimensions.get('window');
+const {width: screenWidth} = Dimensions.get('window');
+
 export class ProductCards extends React.Component<any, State> {
   ref = React.createRef<any>();
 
@@ -31,31 +23,17 @@ export class ProductCards extends React.Component<any, State> {
     super(props);
     this.state = {
       activeIndex: 0,
-      carouselItems: [
-        {
-          img: 'https://i.imgur.com/MABUbpDl.jpg',
-          title: 'Moda Casual',
-        },
-        {
-          img: 'https://i.imgur.com/2nCt3Sbl.jpg',
-          title: 'Acessórios',
-        },
-        {
-          img: 'https://i.imgur.com/KZsmUi2l.jpg',
-          title: 'Tênis Esportivo',
-        },
-      ],
     };
   }
 
   renderItem(
-    { item, index }: { item: CarouselCardModel; index: number },
+    {item}: {item: CarouselCardModel},
     parallaxProps?: AdditionalParallaxProps,
   ) {
     return (
       <View style={styles.item}>
         <ParallaxImage
-          source={{ uri: item.img }}
+          source={{uri: item.img}}
           containerStyle={styles.imageContainer}
           style={styles.image}
           parallaxFactor={0.4}
@@ -67,7 +45,6 @@ export class ProductCards extends React.Component<any, State> {
       </View>
     );
   }
-
 
   render() {
     return (
@@ -82,7 +59,7 @@ export class ProductCards extends React.Component<any, State> {
           sliderWidth={screenWidth}
           sliderHeight={screenWidth}
           itemWidth={screenWidth - 260}
-          data={this.state.carouselItems}
+          data={ProductFilter}
           renderItem={this.renderItem}
           hasParallaxImages={true}
           loop={true}

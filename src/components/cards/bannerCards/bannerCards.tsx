@@ -1,21 +1,7 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Platform,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {View, StyleSheet, Dimensions, Image} from 'react-native';
 
-import styled from 'styled-components/native';
-
-import Carousel, {
-  AdditionalParallaxProps,
-  Pagination,
-  ParallaxImage,
-} from 'react-native-snap-carousel';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 
 import {BannerCardModel} from '../../../models/carousel';
 import {ENTRIES1} from '../../../static/entries';
@@ -31,24 +17,18 @@ const {width: screenWidth} = Dimensions.get('window');
 export class BannerCards extends React.Component<any, State> {
   ref = React.createRef<any>();
 
-  constructor(props: any){
+  constructor(props: any) {
     super(props);
     this.state = {
       activeIndex: 0,
-    }
+    };
   }
-  renderBanner(
-    {item, index}: {item: BannerCardModel; index: number},
-    parallaxProps?: AdditionalParallaxProps,
-  ) {
+  renderBanner({item}: {item: BannerCardModel}) {
     return (
       <View style={styles.item}>
         <View style={styles.imageContainer}>
-            <Image
-              source={{uri: item.img}}
-              style={styles.image}
-            />
-          </View>
+          <Image source={{uri: item.img}} style={styles.image} />
+        </View>
       </View>
     );
   }
@@ -64,11 +44,9 @@ export class BannerCards extends React.Component<any, State> {
           borderRadius: 5,
           backgroundColor: 'rgb(60, 189, 175)',
         }}
-        inactiveDotStyle={
-          {
-            backgroundColor: 'rgb(234, 234, 234)',
-          }
-        }
+        inactiveDotStyle={{
+          backgroundColor: 'rgb(234, 234, 234)',
+        }}
         inactiveDotOpacity={1}
         inactiveDotScale={1}
       />
@@ -78,36 +56,36 @@ export class BannerCards extends React.Component<any, State> {
   render() {
     return (
       <View>
-          <Carousel
-              sliderWidth={screenWidth}
-              sliderHeight={screenWidth}
-              itemWidth={screenWidth - 60}
-              ref={this.ref}
-              data={ENTRIES1}
-              autoplayDelay={100}
-              renderItem={this.renderBanner}
-              autoplay={true}
-              loop={true}
-              onSnapToItem={(index: number) => this.setState({activeIndex: index})}
-          />
-          { this.pagination }
+        <Carousel
+          sliderWidth={screenWidth}
+          sliderHeight={screenWidth}
+          itemWidth={screenWidth - 60}
+          ref={this.ref}
+          data={ENTRIES1}
+          autoplayDelay={100}
+          renderItem={this.renderBanner}
+          autoplay={true}
+          loop={true}
+          onSnapToItem={(index: number) => this.setState({activeIndex: index})}
+        />
+        {this.pagination}
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({  
+const styles = StyleSheet.create({
   item: {
-    marginTop: 20,    
+    marginTop: 20,
     borderRadius: 5,
     width: 330,
     height: 149,
   },
   imageContainer: {
-    backgroundColor:'red',
+    backgroundColor: 'red',
     width: 330,
     height: 149,
-    borderRadius: 2,    
+    borderRadius: 2,
   },
   image: {
     ...StyleSheet.absoluteFillObject,

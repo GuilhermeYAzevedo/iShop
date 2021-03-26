@@ -1,47 +1,32 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Platform,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 
 import styled from 'styled-components/native';
-
-import Carousel, {
-  AdditionalParallaxProps,
-  ParallaxImage,
-} from 'react-native-snap-carousel';
-import {CarouselCardModel} from '../../../models/carousel';
 
 interface State {
   activeBanner?: number;
 }
 
-const {width: screenWidth} = Dimensions.get('window');
-//const height = width * 100 / 60;
-
-const image = [
+const images = [
   'https://static.vecteezy.com/ti/vetor-gratis/p3/662999-memphis-style-banner-design-de-venda-de-moda-gr%C3%A1tis-vetor.jpg',
   'https://cdn.nohat.cc/thumb/f/720/f0e2285d65a3422bbc47.jpg',
   'https://i.pinimg.com/originals/82/9b/f3/829bf30dc46eaa6f15d6992ccdc049af.png',
 ];
 
 export class BannerCardsManual extends React.Component<any, State> {
-  change = ({nativeEvent}) => {
-    const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width);
-    if (slide !== this.state.activeBanner){
+  change = ({nativeEvent}: {nativeEvent: any}) => {
+    const slide = Math.ceil(
+      nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width,
+    );
+    if (slide !== this.state.activeBanner) {
       this.setState({activeBanner: slide});
     }
-  }
+  };
 
   constructor(props: any) {
     super(props);
     this.state = {
-      activeBanner: 0
+      activeBanner: 0,
     };
   }
 
@@ -60,7 +45,7 @@ export class BannerCardsManual extends React.Component<any, State> {
             pagingEnabled
             onScroll={this.change}
             showsHorizontalScrollIndicator={false}>
-            {image.map((image, index) => (
+            {images.map((image, index) => (
               <Image
                 key={index}
                 source={{uri: image}}
@@ -69,8 +54,14 @@ export class BannerCardsManual extends React.Component<any, State> {
             ))}
           </ScrollView>
           <View style={styles.pagination}>
-            {image.map((i, k) => (
-              <Text key={k} style={ k == this.state.activeBanner ? styles.pagingActiveText : styles.pagingText}>
+            {images.map((i, k) => (
+              <Text
+                key={k}
+                style={
+                  k === this.state.activeBanner
+                    ? styles.pagingActiveText
+                    : styles.pagingText
+                }>
                 ⬤
               </Text>
             ))}
@@ -120,12 +111,12 @@ const styles = StyleSheet.create({
   },
   pagingText: {
     margin: 3,
-    color: '#EAEAEA'
+    color: '#EAEAEA',
   },
   pagingActiveText: {
     margin: 3,
     color: '#3CBDAF',
-  }
+  },
 });
 
 export const Container = styled.View`

@@ -7,6 +7,7 @@ import styles from './homeStyle';
 import {ProductCards} from '../components/cards/productCards/productCards';
 import { BannerCards } from '../components/cards/bannerCards/bannerCards';
 import { BannerCardsManual } from '../components/cards/bannerCardsManual/bannerCardsManual';
+import { NearStores } from '../components/nearStores/nearStores';
 
 const Home = () => {
   return (
@@ -19,11 +20,11 @@ const Home = () => {
       <ProductCards title={'Moda Casual'} />
       {/* Banner Manual Slide */}
       {/* <BannerCardsManual /> */}
+
       {/* Banner Plugin */}
       <BannerCards />
-      {/* banners */}
-
       {/* near stores */}
+      <NearStores />
     </View>
   );
 };
