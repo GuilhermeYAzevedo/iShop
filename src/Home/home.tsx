@@ -7,9 +7,17 @@ import styles from './homeStyle';
 import {ProductCards} from '../components/cards/productCards/productCards';
 import { BannerCards } from '../components/cards/bannerCards/bannerCards';
 import { BannerCardsManual } from '../components/cards/bannerCardsManual/bannerCardsManual';
-import { NearStores } from '../components/nearStores/nearStores';
+import NearStore, { NearStores } from '../components/nearStores/nearStores';
+import { NearStoreModel } from '../models/nearStoresModel'
 
-const Home = () => {
+export default function Home() {
+
+  function constructStores(store: NearStoreModel) {
+    return <NearStore>
+
+    </NearStore>
+  }
+
   return (
     <View style={styles.container}>
       {/* Header     */}
@@ -29,4 +37,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+/*export default Home;*/

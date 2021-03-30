@@ -5,7 +5,7 @@ export const Stores = [
     category: 'Moda esportiva',
     verified: false,
   },
-  {
+  /*  {
     img:
       'https://i.pinimg.com/originals/90/0c/7f/900c7fca71361d347ff384cc89ff966d.png',
     name: 'Animale',
@@ -36,5 +36,5 @@ export const Stores = [
     name: 'Capodarte Vila Mariana',
     category: 'Moda feminina',
     verified: false,
-  },
+  },*/
 ];

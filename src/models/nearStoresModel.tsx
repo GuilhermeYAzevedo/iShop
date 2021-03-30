@@ -11,3 +11,6 @@ export class NearStoresModel {
     this.verified = false;
   }
 }
+
+export class NearStoreModel {
+}
